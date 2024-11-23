@@ -1,20 +1,16 @@
-import {useEffect, useState} from "react";
-import {subscribe} from "../lib/events/emitter.ts";
+import {useEventLog} from "../lib/events/useEventLog.ts";
 
 export function EventLog() {
-  const [events, setEvents] = useState<string[]>([])
-
-  useEffect(() => (
-    subscribe('addButtonClicked', (data) => {
-      setEvents(events => [...events, `addButtonClicked: ${data.time.toLocaleString()}`])
-    })
-  ), [])
+  const {events, clearEvents} = useEventLog();
 
   return (
-    <ul>
-      {events.map((event, index) => (
-        <li key={index}>{event}</li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {events.map((event, index) => (
+          <li key={index}>{event}</li>
+        ))}
+      </ul>
+      <button onClick={() => clearEvents()} className={'rounded border px-2 py-1'}>Clear events</button>
+    </>
   )
 }

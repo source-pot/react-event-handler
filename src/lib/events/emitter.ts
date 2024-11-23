@@ -1,19 +1,16 @@
+import {Event, EventPayload} from './types'
 
-export type Subscriber = (data: unknown) => void
+type Subscriber<Payload extends EventPayload> = (payload: Payload) => void
 
-const subscribers = new Map<string, Set<Subscriber>>()
+const subscribers = new Map<string, Set<Subscriber<EventPayload>>>()
 
-export function emit(eventName: string, data: unknown) {
+export function emit<T extends Event<EventPayload>>(eventName: T['name'], payload: T['payload']) {
   if (subscribers.has(eventName)) {
-    subscribers.get(eventName)!.forEach(subscriber => subscriber(data));
-  }
-
-  if (subscribers.has('*')) {
-    subscribers.get('*')!.forEach(subscriber => subscriber(data));
+    subscribers.get(eventName)!.forEach(subscriber => subscriber(payload));
   }
 }
 
-export function subscribe(eventName: string, subscriber: Subscriber) {
+export function subscribe<T extends Event<EventPayload>>(eventName: T['name'], subscriber: Subscriber<T['payload']>) {
   if (!subscribers.has(eventName)) {
     subscribers.set(eventName, new Set())
   }

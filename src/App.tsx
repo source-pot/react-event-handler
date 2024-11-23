@@ -1,15 +1,14 @@
 import {EventLog} from "./components/EventLog.tsx";
-import {emit} from "./lib/events/emitter.ts";
+import {ItemList} from "./components/ItemList.tsx";
+import {AddItemForm} from "./components/AddItemForm.tsx";
 
 export function App() {
   return (
-    <main className={'grid grid-cols-3'}>
-      <section>
-        <button onClick={() => emit('addButtonClicked', {time: new Date()})} className={'border rounded px-2 py-1'}>addButtonClick</button>
+    <main className={'flex flex-col gap-4 max-w-xl w-xl mx-auto border rounded-xl p-8'}>
+      <section className={'flex flex-col gap-2 items-start'}>
+        <AddItemForm/>
       </section>
-      <section>
-        something that responds to events
-      </section>
+      <ItemList/>
       <section>
         <EventLog/>
       </section>
