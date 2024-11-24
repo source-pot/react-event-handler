@@ -4,14 +4,12 @@ import {AddItemForm} from "./components/AddItemForm.tsx";
 
 export function App() {
   return (
-    <main className={'flex flex-col gap-4 max-w-xl w-xl mx-auto border rounded-xl p-8'}>
-      <section className={'flex flex-col gap-2 items-start'}>
+    <main className={'p-8 grid lg:grid-cols-2 gap-4'}>
+      <section className={'flex flex-col gap-4'}>
         <AddItemForm/>
+        <ItemList/>
       </section>
-      <ItemList/>
-      <section>
-        <EventLog/>
-      </section>
+      <EventLog/>
     </main>
   )
 }
