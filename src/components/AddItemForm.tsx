@@ -8,6 +8,7 @@ export function AddItemForm() {
     e.preventDefault()
 
     emit('addTask', {time: new Date(), item: {
+      id: crypto.randomUUID(),
       name: itemRef.current!.value,
       completed: false,
     }})
