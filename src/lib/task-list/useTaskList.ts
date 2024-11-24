@@ -7,20 +7,20 @@ export function useTaskList() {
   const [items, setItems] = useState<Item[]>([])
 
   useEffect(() => (
-    subscribe<AddTaskEvent>('addTask', ({item}) => {
+    subscribe<AddTaskEvent>('addTask', async ({item}) => {
       setItems(items => [...items, item])
     })
   ), [])
 
   useEffect(() => (
-    subscribe<DeleteTaskEvent>('deleteTask', ({item}) => {
-      setItems(items => items.filter(i => i.name !== item.name))
+    subscribe<DeleteTaskEvent>('deleteTask', async ({item}) => {
+      setItems(items => items.filter(i => i.id !== item.id))
     })
   ), [])
 
   useEffect(() => (
-    subscribe<CompleteTaskEvent>('completeTask', ({item}) => {
-      setItems(items => items.map(i => i.name === item.name ? {...i, completed: !i.completed} : i))
+    subscribe<CompleteTaskEvent>('completeTask', async ({item}) => {
+      setItems(items => items.map(i => i.id === item.id ? {...i, completed: !i.completed} : i))
     })
   ), [])
 
