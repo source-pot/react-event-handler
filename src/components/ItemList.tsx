@@ -9,7 +9,7 @@ export function ItemList() {
       <h2 className={'border-b'}>Items</h2>
       <ul>
         {items.map((item, index) => (
-          <Item key={index} name={item}/>
+          <Item key={index} name={item.name} completed={item.completed}/>
         ))}
       </ul>
     </section>

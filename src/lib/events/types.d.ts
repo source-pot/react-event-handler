@@ -1,3 +1,4 @@
+import {Item} from "../task-list/types";
 
 export type EventPayload = object
 
@@ -6,18 +7,26 @@ export interface Event<Payload extends EventPayload> {
   payload: Payload;
 }
 
-export interface AddButtonClickedEvent extends Event<AddButtonClickedPayload> {
-  name: 'addButtonClicked'
+export interface AddTaskEvent extends Event {
+  name: 'addTask'
   payload: {
-    item: string
+    item: Item
     time: Date
   }
 }
 
-export interface DeleteButtonClickedEvent extends Event<DeleteButtonClickedPayload> {
-  name: 'deleteButtonClicked'
+export interface DeleteTaskEvent extends Event {
+  name: 'deleteTask'
   payload: {
-    item: string
+    item: Item
+    time: Date
+  }
+}
+
+export interface CompleteTaskEvent extends Event {
+  name: 'completeTask'
+  payload: {
+    item: Item
     time: Date
   }
 }

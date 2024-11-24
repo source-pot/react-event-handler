@@ -1,24 +1,39 @@
 import {useEffect, useState} from "react";
 import {subscribe} from "./emitter.ts";
-import {AddButtonClickedEvent, DeleteButtonClickedEvent} from "./types";
+import {AddTaskEvent, CompleteTaskEvent, DeleteTaskEvent} from "./types";
 
 export function useEventLog() {
-  const [events, setEvents] = useState<string[]>([])
+  const [events, setEvents] = useState<Record<string,number>>({})
 
   useEffect(() => (
-    subscribe<AddButtonClickedEvent>('addButtonClicked', (payload) => {
-      setEvents(events => [...events, `addButtonClicked: ${payload.item}`])
+    subscribe<AddTaskEvent>('addTask', () => {
+      setEvents(events => ({
+        ...events,
+        addTask: (events.addTask ?? 0) + 1
+      }))
     })
   ), [])
 
   useEffect(() => (
-    subscribe<DeleteButtonClickedEvent>('deleteButtonClicked', (payload) => {
-      setEvents(events => [...events, `deleteButtonClicked: ${payload.item}`])
+    subscribe<DeleteTaskEvent>('deleteTask', () => {
+      setEvents(events => ({
+        ...events,
+        deleteTask: (events.deleteTask ?? 0) + 1
+      }))
+    })
+  ), [])
+
+  useEffect(() => (
+    subscribe<CompleteTaskEvent>('completeTask', () => {
+      setEvents(events => ({
+        ...events,
+        completeTask: (events.completeTask ?? 0) + 1
+      }))
     })
   ), [])
 
   return {
     events,
-    clearEvents: () => setEvents([])
+    clearEvents: () => setEvents(_ => ({}))
   };
 }

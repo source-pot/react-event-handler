@@ -7,7 +7,10 @@ export function AddItemForm() {
   function addItem(e: FormEvent) {
     e.preventDefault()
 
-    emit('addButtonClicked', {time: new Date(), item: itemRef.current!.value})
+    emit('addTask', {time: new Date(), item: {
+      name: itemRef.current!.value,
+      completed: false,
+    }})
     itemRef.current!.value = ''
   }
 
