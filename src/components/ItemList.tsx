@@ -1,6 +1,9 @@
 import {useTaskList} from "../lib/task-list/useTaskList.ts";
 import {Item} from "./Item.tsx";
 
+/**
+ * This component renders the list of items it receives from its useTaskList hook.
+ */
 export function ItemList() {
   const items = useTaskList()
 

@@ -3,6 +3,11 @@ import {subscribe} from "../events/emitter.ts";
 import {AddTaskEvent, CompleteTaskEvent, DeleteTaskEvent} from "../events/types";
 import {Item} from "./types";
 
+/**
+ * This is where the whole task list is stored.  We just listen to the events that should modify the list and update
+ * it accordingly when they happen.  The only "whole list" state is stored here and the list will be unique to the
+ * component that uses this hook.
+ */
 export function useTaskList() {
   const [items, setItems] = useState<Item[]>([])
 

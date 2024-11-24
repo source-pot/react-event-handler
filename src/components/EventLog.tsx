@@ -1,5 +1,8 @@
 import {useEventLog} from "../lib/events/useEventLog.ts";
 
+/**
+ * For the purposes of this demo, the Event Log just lists out a count of events emitted while being used.
+ */
 export function EventLog() {
   const {events, clearEvents} = useEventLog();
 

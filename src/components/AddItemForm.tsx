@@ -1,6 +1,10 @@
 import {FormEvent, useRef} from "react";
 import {emit} from "../lib/events/emitter.ts";
 
+/**
+ * This component is a simple for (not controller) to allow a user to add a new item.
+ * All it needs to do here is emit the AddTask event with the new task data.
+ */
 export function AddItemForm() {
   const itemRef = useRef<HTMLInputElement>(null)
 
