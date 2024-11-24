@@ -8,8 +8,8 @@ export function ItemList() {
     <section className={'p-4'}>
       <h2 className={'border-b'}>Items</h2>
       <ul>
-        {items.map((item, index) => (
-          <Item key={index} name={item.name} completed={item.completed}/>
+        {items.map(item => (
+          <Item key={item.id} item={item}/>
         ))}
       </ul>
     </section>
